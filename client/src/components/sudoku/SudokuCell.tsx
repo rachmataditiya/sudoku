@@ -27,7 +27,7 @@ export default function SudokuCell({
   return (
     <button
       className={cn(
-        "w-12 h-12 relative transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50",
+        "w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 relative transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50",
         // Base styling
         "bg-white border border-gray-300 hover:bg-gray-50",
         // Selection and relation highlighting
@@ -41,7 +41,7 @@ export default function SudokuCell({
         isRightBorder && "border-r-2 border-r-gray-800",
         isBottomBorder && "border-b-2 border-b-gray-800",
         // Typography
-        "text-lg font-medium"
+        "text-sm sm:text-lg font-medium"
       )}
       onClick={onClick}
       disabled={isOriginal}

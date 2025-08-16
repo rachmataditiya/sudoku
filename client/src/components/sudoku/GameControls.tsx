@@ -58,32 +58,37 @@ export default function GameControls({ onNewGame }: GameControlsProps) {
     <div className="space-y-4">
       {/* Main Controls */}
       <Card className="bg-white/90 backdrop-blur-sm">
-        <CardContent className="p-4">
+        <CardContent className="p-3 sm:p-4">
           <div className="flex flex-wrap gap-2 justify-center">
             <Button
               onClick={isGameRunning ? cancelGame : (onNewGame || (() => window.location.reload()))}
               variant={isGameRunning ? "destructive" : "default"}
-              className="flex items-center gap-2"
+              size="sm"
+              className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm"
             >
-              <Plus className="h-4 w-4" />
-              {isGameRunning ? 'Batalkan Permainan' : GAME_TEXTS.newGame}
+              <Plus className="h-3 w-3 sm:h-4 sm:w-4" />
+              <span className="hidden sm:inline">{isGameRunning ? 'Batalkan Permainan' : GAME_TEXTS.newGame}</span>
+              <span className="sm:hidden">{isGameRunning ? 'Batal' : 'Baru'}</span>
             </Button>
 
             {!isComplete && (
               <Button
                 onClick={isPaused ? resumeGame : pauseGame}
                 variant="outline"
-                className="flex items-center gap-2"
+                size="sm"
+                className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm"
               >
                 {isPaused ? (
                   <>
-                    <Play className="h-4 w-4" />
-                    {GAME_TEXTS.resume}
+                    <Play className="h-3 w-3 sm:h-4 sm:w-4" />
+                    <span className="hidden sm:inline">{GAME_TEXTS.resume}</span>
+                    <span className="sm:hidden">Main</span>
                   </>
                 ) : (
                   <>
-                    <Pause className="h-4 w-4" />
-                    {GAME_TEXTS.pause}
+                    <Pause className="h-3 w-3 sm:h-4 sm:w-4" />
+                    <span className="hidden sm:inline">{GAME_TEXTS.pause}</span>
+                    <span className="sm:hidden">Jeda</span>
                   </>
                 )}
               </Button>
@@ -92,86 +97,40 @@ export default function GameControls({ onNewGame }: GameControlsProps) {
             <Button
               onClick={getHint}
               variant="outline"
+              size="sm"
               disabled={isComplete || isPaused}
-              className="flex items-center gap-2"
+              className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm"
             >
-              <Lightbulb className="h-4 w-4" />
-              {GAME_TEXTS.hint}
+              <Lightbulb className="h-3 w-3 sm:h-4 sm:w-4" />
+              <span className="hidden sm:inline">{GAME_TEXTS.hint}</span>
+              <span className="sm:hidden">Hint</span>
             </Button>
 
             <Button
               onClick={checkSolution}
               variant="outline"
+              size="sm"
               disabled={isComplete || isPaused}
-              className="flex items-center gap-2"
+              className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm"
             >
-              <Check className="h-4 w-4" />
-              {GAME_TEXTS.check}
-            </Button>
-
-            <Button
-              onClick={toggleNotesMode}
-              variant={notesMode ? "default" : "outline"}
-              disabled={isComplete || isPaused}
-              className="flex items-center gap-2"
-            >
-              <Edit3 className="h-4 w-4" />
-              {GAME_TEXTS.notes}
-              {notesMode && <Badge variant="secondary" className="ml-1">ON</Badge>}
+              <Check className="h-3 w-3 sm:h-4 sm:w-4" />
+              <span className="hidden sm:inline">{GAME_TEXTS.check}</span>
+              <span className="sm:hidden">Cek</span>
             </Button>
           </div>
         </CardContent>
       </Card>
 
-      {/* Number Input */}
-      <Card className="bg-white/90 backdrop-blur-sm">
-        <CardContent className="p-4">
-          <div className="space-y-3">
-            <div className="text-center">
-              <p className="text-sm text-gray-600">
-                {selectedCell 
-                  ? `Sel terpilih: Baris ${selectedCell.row + 1}, Kolom ${selectedCell.col + 1}`
-                  : 'Pilih sel untuk memasukkan angka'
-                }
-              </p>
-            </div>
-            
-            <div className="grid grid-cols-5 gap-2 max-w-md mx-auto">
-              {/* Numbers 1-9 */}
-              {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(num => (
-                <Button
-                  key={num}
-                  onClick={() => handleNumberClick(num)}
-                  disabled={isDisabled || isPaused}
-                  variant="outline"
-                  className={cn(
-                    "aspect-square text-lg font-semibold",
-                    "hover:bg-blue-50 hover:border-blue-300",
-                    "disabled:opacity-50 disabled:cursor-not-allowed"
-                  )}
-                >
-                  {num}
-                </Button>
-              ))}
-              
-              {/* Clear button */}
-              <Button
-                onClick={handleClearClick}
-                disabled={isDisabled || isPaused}
-                variant="outline"
-                className="aspect-square flex items-center justify-center col-span-1"
-              >
-                <Eraser className="h-5 w-5" />
-              </Button>
-            </div>
-
-            {notesMode && (
-              <div className="text-center">
-                <Badge variant="secondary" className="text-xs">
-                  Mode Catatan Aktif - Klik angka untuk menambah/menghapus catatan
-                </Badge>
-              </div>
-            )}
+      {/* Mobile Instruction */}
+      <Card className="bg-blue-50/90 backdrop-blur-sm border-blue-200">
+        <CardContent className="p-3">
+          <div className="text-center">
+            <p className="text-sm text-blue-700">
+              {selectedCell 
+                ? `Pilih sel Baris ${selectedCell.row + 1}, Kolom ${selectedCell.col + 1} untuk memasukkan angka`
+                : '👆 Ketuk sel kosong untuk memasukkan angka'
+              }
+            </p>
           </div>
         </CardContent>
       </Card>

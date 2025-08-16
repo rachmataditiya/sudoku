@@ -64,12 +64,12 @@ export default function SudokuGrid() {
   if (isPaused) {
     return (
       <div className="relative">
-        <div className="grid grid-cols-9 gap-1 bg-gray-300 p-4 rounded-lg blur-sm">
+        <div className="grid grid-cols-9 gap-0.5 sm:gap-1 bg-gray-300 p-2 sm:p-3 md:p-4 rounded-lg blur-sm max-w-fit mx-auto">
           {grid.map((row, rowIndex) =>
             row.map((_, colIndex) => (
               <div
                 key={`${rowIndex}-${colIndex}`}
-                className="w-12 h-12 bg-white border border-gray-400"
+                className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-white border border-gray-400"
               />
             ))
           )}
@@ -86,7 +86,7 @@ export default function SudokuGrid() {
 
   return (
     <div 
-      className="grid grid-cols-9 gap-1 bg-gray-800 p-2 rounded-lg shadow-inner"
+      className="grid grid-cols-9 gap-0.5 sm:gap-1 bg-gray-800 p-2 sm:p-3 md:p-4 rounded-lg shadow-inner max-w-fit mx-auto"
       onClick={handleGridClick}
     >
       {grid.map((row, rowIndex) =>

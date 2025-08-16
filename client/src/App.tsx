@@ -21,54 +21,43 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
       <div className="max-w-4xl mx-auto">
-        <Card className="mb-6 bg-white/90 backdrop-blur-sm shadow-xl">
-          <CardHeader className="text-center">
-            <CardTitle className="text-3xl font-bold text-gray-800 flex items-center justify-center gap-3">
-              <Calculator className="h-8 w-8 text-blue-600" />
-              Sudoku
-            </CardTitle>
-            <p className="text-gray-600 mt-2">
-              Game puzzle angka yang menantang untuk mengasah kemampuan logika Anda
-            </p>
-          </CardHeader>
-        </Card>
 
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsList className="grid w-full grid-cols-3 bg-white/80 backdrop-blur-sm">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="h-screen flex flex-col">
+          <TabsList className="grid w-full grid-cols-3 bg-white/95 backdrop-blur-sm rounded-none border-t border-gray-200 mt-auto order-last sticky bottom-0 h-16">
             <TabsTrigger 
               value="game" 
-              className="data-[state=active]:bg-blue-600 data-[state=active]:text-white flex items-center gap-2"
+              className="data-[state=active]:bg-blue-600 data-[state=active]:text-white flex flex-col items-center justify-center gap-1 py-2 text-xs font-medium"
             >
-              <Calculator className="h-4 w-4" />
-              Permainan
+              <Calculator className="h-5 w-5" />
+              Game
             </TabsTrigger>
             <TabsTrigger 
               value="statistics"
-              className="data-[state=active]:bg-blue-600 data-[state=active]:text-white flex items-center gap-2"
+              className="data-[state=active]:bg-blue-600 data-[state=active]:text-white flex flex-col items-center justify-center gap-1 py-2 text-xs font-medium"
             >
-              <BarChart3 className="h-4 w-4" />
-              Statistik
+              <BarChart3 className="h-5 w-5" />
+              Stats
             </TabsTrigger>
             <TabsTrigger 
               value="profile"
-              className="data-[state=active]:bg-blue-600 data-[state=active]:text-white flex items-center gap-2"
+              className="data-[state=active]:bg-blue-600 data-[state=active]:text-white flex flex-col items-center justify-center gap-1 py-2 text-xs font-medium"
             >
-              <User className="h-4 w-4" />
+              <User className="h-5 w-5" />
               Profile
             </TabsTrigger>
           </TabsList>
 
-          <TabsContent value="game" className="space-y-0">
+          <TabsContent value="game" className="flex-1 overflow-auto p-2 pb-20">
             <SudokuGame />
           </TabsContent>
 
-          <TabsContent value="statistics" className="space-y-0">
+          <TabsContent value="statistics" className="flex-1 overflow-auto p-2 pb-20">
             <Statistics />
           </TabsContent>
 
-          <TabsContent value="profile" className="space-y-0">
+          <TabsContent value="profile" className="flex-1 overflow-auto p-2 pb-20">
             <Profile />
           </TabsContent>
         </Tabs>

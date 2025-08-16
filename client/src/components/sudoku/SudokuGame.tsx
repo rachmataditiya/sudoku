@@ -5,6 +5,7 @@ import SudokuGrid from './SudokuGrid';
 import GameControls from './GameControls';
 import Timer from './Timer';
 import DifficultySelector from './DifficultySelector';
+import MobileNumberPicker from './MobileNumberPicker';
 import { Card, CardContent } from '../ui/card';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '../ui/dialog';
 import { Button } from '../ui/button';
@@ -22,6 +23,7 @@ export default function SudokuGame() {
     isComplete,
     isPaused,
     hintsUsed,
+    selectedCell,
     newGame,
     restartGame,
     isGenerating
@@ -31,6 +33,7 @@ export default function SudokuGame() {
   const [showCompleteDialog, setShowCompleteDialog] = useState(false);
   const [gameTime, setGameTime] = useState(0);
   const [isNewRecord, setIsNewRecord] = useState(false);
+  const [showMobileNumberPicker, setShowMobileNumberPicker] = useState(false);
 
   // Handle game completion
   useEffect(() => {
@@ -68,27 +71,36 @@ export default function SudokuGame() {
     setShowCompleteDialog(false);
   };
 
+  // Show mobile number picker when cell is selected
+  useEffect(() => {
+    if (selectedCell && !isComplete && !isPaused) {
+      setShowMobileNumberPicker(true);
+    } else {
+      setShowMobileNumberPicker(false);
+    }
+  }, [selectedCell, isComplete, isPaused]);
+
   if (startTime === 0) {
     return <DifficultySelector onSelect={handleNewGame} isLoading={isGenerating} />;
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-3 sm:space-y-6">
       {/* Game Header */}
       <Card className="bg-white/90 backdrop-blur-sm">
-        <CardContent className="p-4">
-          <div className="flex items-center justify-between flex-wrap gap-4">
-            <div className="flex items-center gap-4">
-              <Badge variant="outline" className="text-sm">
+        <CardContent className="p-3 sm:p-4">
+          <div className="flex items-center justify-between flex-wrap gap-2 sm:gap-4">
+            <div className="flex items-center gap-2 sm:gap-4">
+              <Badge variant="outline" className="text-xs sm:text-sm">
                 {DIFFICULTY_LABELS[difficulty]}
               </Badge>
-              <div className="flex items-center gap-2 text-sm text-gray-600">
+              <div className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm text-gray-600">
                 <Zap className="h-4 w-4" />
                 <span>{GAME_TEXTS.hintsUsed}: {hintsUsed}</span>
               </div>
             </div>
             
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2 sm:gap-4">
               <Timer startTime={startTime} isPaused={isPaused} isComplete={isComplete} />
               <Button
                 variant="outline"
@@ -107,14 +119,22 @@ export default function SudokuGame() {
       {/* Game Board */}
       <div className="flex justify-center">
         <Card className="bg-white/95 backdrop-blur-sm shadow-2xl">
-          <CardContent className="p-6">
+          <CardContent className="p-2 sm:p-4 md:p-6">
             <SudokuGrid />
           </CardContent>
         </Card>
       </div>
 
-      {/* Game Controls */}
-      <GameControls />
+      {/* Game Controls - Hidden on mobile when number picker is shown */}
+      <div className={showMobileNumberPicker ? "hidden" : "block"}>
+        <GameControls />
+      </div>
+
+      {/* Mobile Number Picker */}
+      <MobileNumberPicker 
+        isVisible={showMobileNumberPicker}
+        onClose={() => setShowMobileNumberPicker(false)}
+      />
 
       {/* Completion Dialog */}
       <Dialog open={showCompleteDialog} onOpenChange={setShowCompleteDialog}>
