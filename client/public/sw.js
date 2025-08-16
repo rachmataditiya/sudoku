@@ -119,7 +119,7 @@ self.addEventListener('push', (event) => {
     };
 
     event.waitUntil(
-      self.registration.showNotification('Sudoku Indonesia', options)
+      self.registration.showNotification('Sudoku', options)
     );
   }
 });

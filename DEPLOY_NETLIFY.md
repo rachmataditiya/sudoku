@@ -1,4 +1,4 @@
-# 🚀 Panduan Deploy Sudoku Indonesia ke Netlify
+# 🚀 Panduan Deploy Sudoku ke Netlify
 
 ## ✅ Persiapan Deploy
 

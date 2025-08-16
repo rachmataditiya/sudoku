@@ -33,7 +33,7 @@ export default function ProfileSetup() {
               <GamepadIcon className="h-8 w-8 text-blue-600" />
             </div>
             <CardTitle className="text-2xl text-gray-800">
-              Selamat Datang di Sudoku Indonesia!
+              Selamat Datang di Sudoku!
             </CardTitle>
             <p className="text-gray-600 mt-2">
               Mari buat profile Anda untuk pengalaman bermain yang lebih personal

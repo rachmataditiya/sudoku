@@ -29,7 +29,7 @@ export default function InstallPrompt() {
           </div>
           
           <div className="flex-1">
-            <h4 className="font-semibold text-sm">Install Sudoku Indonesia</h4>
+            <h4 className="font-semibold text-sm">Install Sudoku</h4>
             <p className="text-blue-100 text-xs mt-1">
               Install aplikasi untuk pengalaman yang lebih baik dan akses offline
             </p>

@@ -27,7 +27,7 @@ function App() {
           <CardHeader className="text-center">
             <CardTitle className="text-3xl font-bold text-gray-800 flex items-center justify-center gap-3">
               <Calculator className="h-8 w-8 text-blue-600" />
-              Sudoku Indonesia
+              Sudoku
             </CardTitle>
             <p className="text-gray-600 mt-2">
               Game puzzle angka yang menantang untuk mengasah kemampuan logika Anda
