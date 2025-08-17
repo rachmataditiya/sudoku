@@ -3,7 +3,7 @@ import SudokuCell from './SudokuCell';
 import { useEffect, useCallback } from 'react';
 
 export default function SudokuGrid() {
-  const { grid, selectedCell, selectCell, clearSelection, setCell, clearCell, isPaused } = useSudoku();
+  const { grid, selectedCell, highlightedNumber, selectCell, clearSelection, setCell, clearCell, isPaused } = useSudoku();
 
   // Handle keyboard input
   const handleKeyDown = useCallback((event: KeyboardEvent) => {
@@ -104,6 +104,11 @@ export default function SudokuGrid() {
              Math.floor(selectedCell.col / 3) === Math.floor(colIndex / 3))
           );
 
+          // Highlight cells with the same number as the selected cell
+          const isHighlighted = highlightedNumber !== null && 
+                                cell.value !== 0 && 
+                                cell.value === highlightedNumber;
+
           return (
             <SudokuCell
               key={`${rowIndex}-${colIndex}`}
@@ -112,6 +117,7 @@ export default function SudokuGrid() {
               col={colIndex}
               isSelected={isSelected}
               isRelated={Boolean(isRelated && !isSelected)}
+              isHighlighted={isHighlighted}
               isRightBorder={isRightBorder}
               isBottomBorder={isBottomBorder}
               onClick={() => selectCell(rowIndex, colIndex)}

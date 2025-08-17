@@ -10,7 +10,7 @@ import { Card, CardContent } from '../ui/card';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '../ui/dialog';
 import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
-import { Trophy, Clock, Zap, RotateCcw } from 'lucide-react';
+import { Trophy, Clock, RotateCcw } from 'lucide-react';
 import { GAME_TEXTS, formatTime, DIFFICULTY_LABELS } from '../../utils/indonesian';
 import { Difficulty } from '../../types/sudoku';
 
@@ -94,10 +94,6 @@ export default function SudokuGame() {
               <Badge variant="outline" className="text-xs sm:text-sm">
                 {DIFFICULTY_LABELS[difficulty]}
               </Badge>
-              <div className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm text-gray-600">
-                <Zap className="h-4 w-4" />
-                <span>{GAME_TEXTS.hintsUsed}: {hintsUsed}</span>
-              </div>
             </div>
             
             <div className="flex items-center gap-2 sm:gap-4">

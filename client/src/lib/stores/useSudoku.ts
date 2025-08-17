@@ -22,6 +22,7 @@ interface SudokuStore extends GameState {
   
   // UI state
   selectedCell: { row: number; col: number } | null;
+  highlightedNumber: number | null;
   notesMode: boolean;
   hintsUsed: number;
   errors: Array<{ row: number; col: number }>;
@@ -29,6 +30,7 @@ interface SudokuStore extends GameState {
   
   // Actions for UI state
   selectCell: (row: number, col: number) => void;
+  setHighlightedNumber: (number: number | null) => void;
   toggleNotesMode: () => void;
   clearSelection: () => void;
 }
@@ -55,6 +57,7 @@ export const useSudoku = create<SudokuStore>()(
     isComplete: false,
     isPaused: false,
     selectedCell: null,
+    highlightedNumber: null,
     notesMode: false,
     hintsUsed: 0,
     errors: [],
@@ -88,6 +91,7 @@ export const useSudoku = create<SudokuStore>()(
           isComplete: false,
           isPaused: false,
           selectedCell: null,
+          highlightedNumber: null,
           notesMode: false,
           hintsUsed: 0,
           errors: [],
@@ -260,6 +264,7 @@ export const useSudoku = create<SudokuStore>()(
         isComplete: false,
         isPaused: false,
         selectedCell: null,
+        highlightedNumber: null,
         hintsUsed: 0,
         errors: []
       });
@@ -284,6 +289,7 @@ export const useSudoku = create<SudokuStore>()(
         isComplete: false,
         isPaused: false,
         selectedCell: null,
+        highlightedNumber: null,
         notesMode: false,
         hintsUsed: 0,
         errors: [],
@@ -324,7 +330,17 @@ export const useSudoku = create<SudokuStore>()(
     },
 
     selectCell: (row: number, col: number) => {
-      set({ selectedCell: { row, col } });
+      const state = get();
+      const selectedCellValue = state.grid[row][col].value;
+      
+      set({ 
+        selectedCell: { row, col },
+        highlightedNumber: selectedCellValue !== 0 ? selectedCellValue : null
+      });
+    },
+
+    setHighlightedNumber: (number: number | null) => {
+      set({ highlightedNumber: number });
     },
 
     toggleNotesMode: () => {
@@ -332,7 +348,7 @@ export const useSudoku = create<SudokuStore>()(
     },
 
     clearSelection: () => {
-      set({ selectedCell: null });
+      set({ selectedCell: null, highlightedNumber: null });
     }
   }))
 );

@@ -5,7 +5,6 @@ import { Badge } from '../ui/badge';
 import { 
   Play, 
   Pause, 
-  Lightbulb, 
   Check, 
   Edit3, 
   Plus,
@@ -27,7 +26,6 @@ export default function GameControls({ onNewGame }: GameControlsProps) {
     startTime,
     pauseGame,
     resumeGame,
-    getHint,
     checkSolution,
     toggleNotesMode,
     setCell,
@@ -93,18 +91,6 @@ export default function GameControls({ onNewGame }: GameControlsProps) {
                 )}
               </Button>
             )}
-
-            <Button
-              onClick={getHint}
-              variant="outline"
-              size="sm"
-              disabled={isComplete || isPaused}
-              className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm"
-            >
-              <Lightbulb className="h-3 w-3 sm:h-4 sm:w-4" />
-              <span className="hidden sm:inline">{GAME_TEXTS.hint}</span>
-              <span className="sm:hidden">Hint</span>
-            </Button>
 
             <Button
               onClick={checkSolution}

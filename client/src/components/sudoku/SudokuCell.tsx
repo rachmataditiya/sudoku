@@ -7,6 +7,7 @@ interface SudokuCellProps {
   col: number;
   isSelected: boolean;
   isRelated: boolean;
+  isHighlighted: boolean;
   isRightBorder: boolean;
   isBottomBorder: boolean;
   onClick: () => void;
@@ -18,6 +19,7 @@ export default function SudokuCell({
   col,
   isSelected,
   isRelated,
+  isHighlighted,
   isRightBorder,
   isBottomBorder,
   onClick
@@ -33,6 +35,8 @@ export default function SudokuCell({
         // Selection and relation highlighting
         isSelected && "bg-blue-100 border-blue-500 ring-2 ring-blue-300",
         isRelated && !isSelected && "bg-blue-50",
+        // Number highlighting - highlight cells with the same number
+        isHighlighted && !isSelected && !isRelated && "bg-yellow-100 border-yellow-400",
         // Original cells styling
         isOriginal && "bg-gray-100 font-bold text-gray-800",
         // Error styling
