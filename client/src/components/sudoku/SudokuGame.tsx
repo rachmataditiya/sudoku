@@ -71,14 +71,20 @@ export default function SudokuGame() {
     setShowCompleteDialog(false);
   };
 
-  // Show mobile number picker when cell is selected
+  // Show mobile number picker when cell is selected (only for non-original cells)
   useEffect(() => {
     if (selectedCell && !isComplete && !isPaused) {
-      setShowMobileNumberPicker(true);
+      const selectedCellData = grid[selectedCell.row][selectedCell.col];
+      // Only show numpad for non-original cells
+      if (!selectedCellData.isOriginal) {
+        setShowMobileNumberPicker(true);
+      } else {
+        setShowMobileNumberPicker(false);
+      }
     } else {
       setShowMobileNumberPicker(false);
     }
-  }, [selectedCell, isComplete, isPaused]);
+  }, [selectedCell, isComplete, isPaused, grid]);
 
   if (startTime === 0) {
     return <DifficultySelector onSelect={handleNewGame} isLoading={isGenerating} />;
