@@ -36,9 +36,11 @@ export default function SudokuCell({
         isSelected && "bg-blue-100 border-blue-500 ring-2 ring-blue-300",
         isRelated && !isSelected && "bg-blue-50",
         // Number highlighting - highlight cells with the same number
-        isHighlighted && !isSelected && !isRelated && "bg-yellow-100 border-yellow-400",
+        isHighlighted && !isSelected && !isRelated && "bg-orange-200 border-orange-500 shadow-inner",
         // Original cells styling
-        isOriginal && "bg-gray-100 font-bold text-gray-800",
+        isOriginal && !isHighlighted && "bg-gray-100 font-bold text-gray-800",
+        // Original cells when highlighted
+        isOriginal && isHighlighted && !isSelected && !isRelated && "bg-orange-300 border-orange-600 shadow-inner",
         // Error styling
         isError && "bg-red-100 border-red-500 text-red-700",
         // 3x3 box borders
@@ -48,13 +50,15 @@ export default function SudokuCell({
         "text-sm sm:text-lg font-medium"
       )}
       onClick={onClick}
-      disabled={isOriginal}
     >
       {value !== 0 ? (
         <span className={cn(
           "absolute inset-0 flex items-center justify-center",
-          isOriginal ? "text-gray-800" : "text-blue-600",
-          isError && "text-red-600"
+          isOriginal && !isHighlighted ? "text-gray-800 font-bold" : 
+          isOriginal && isHighlighted && !isSelected && !isRelated ? "text-orange-900 font-bold" :
+          !isOriginal ? "text-blue-600" : "text-gray-800 font-bold",
+          isError && "text-red-600",
+          isHighlighted && !isSelected && !isRelated && !isOriginal && "font-bold text-orange-800"
         )}>
           {value}
         </span>
